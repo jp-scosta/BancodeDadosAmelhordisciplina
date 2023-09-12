@@ -4,3 +4,9 @@ SELECT titulo FROM livros;
 -- exercício 2
 SELECT NOME FROM autores
 WHERE nascimento < '1900-01-01';
+
+-- exercício 3
+SELECT titulo 
+FROM livros 
+INNER JOIN autores ON autor_id=autores.id
+WHERE NOME = 'J.K. Rowling';
