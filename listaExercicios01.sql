@@ -27,3 +27,8 @@ SELECT autores.nome, count(livros.id) AS numero_de_livros
 FROM autores
 LEFT JOIN livros ON autores.id = livros.autor_id
 GROUP BY autores.id;
+
+-- exercício 7
+SELECT curso, count(aluno_id) AS numero_de_alunos
+FROM matriculas
+GROUP BY curso;
