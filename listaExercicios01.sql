@@ -21,3 +21,9 @@ WHERE matriculas.curso = 'Engenharia de Software';
 SELECT produto, SUM(receita) AS receita_total
 FROM vendas
 GROUP BY produto;
+
+-- exercício 6
+SELECT autores.nome, count(livros.id) AS numero_de_livros
+FROM autores
+LEFT JOIN livros ON autores.id = livros.autor_id
+GROUP BY autores.id;
