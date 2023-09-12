@@ -32,3 +32,8 @@ GROUP BY autores.id;
 SELECT curso, count(aluno_id) AS numero_de_alunos
 FROM matriculas
 GROUP BY curso;
+
+-- exercício 8
+SELECT produto, AVG(receita) AS media_receita
+FROM vendas
+GROUP BY produto;
