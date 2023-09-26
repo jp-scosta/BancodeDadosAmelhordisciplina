@@ -131,3 +131,21 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+-- Exercício 9
+
+DELIMITER //
+CREATE PROCEDURE sp_TitulosPorCategoria(IN categoriaNome VARCHAR(100))
+BEGIN
+    -- Esta stored procedure aceita o nome de uma categoria como parâmetro.
+
+    -- Seleciona o título dos livros que pertencem à categoria especificada.
+    SELECT Livro.Titulo
+    FROM Livro
+    INNER JOIN Categoria ON Livro.Categoria_ID = Categoria.Categoria_ID
+    WHERE Categoria.Nome = categoriaNome;
+    
+    -- O resultado será uma lista dos títulos dos livros da categoria.
+END;
+//
+DELIMITER ;
