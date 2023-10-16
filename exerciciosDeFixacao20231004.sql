@@ -104,3 +104,41 @@ END;
 //
 DELIMITER ;
 
+-- 4. Função para Obter a Média de Livros por Editora
+
+DELIMITER //
+CREATE FUNCTION media_livros_por_editora() RETURNS DECIMAL(10,2)
+BEGIN
+    DECLARE editora_id INT;
+    DECLARE total_livros INT DEFAULT 0;
+    DECLARE contador_editoras INT DEFAULT 0;
+    DECLARE done INT DEFAULT 0;
+    
+    DECLARE cur CURSOR FOR
+    SELECT id FROM Editora;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    
+    OPEN cur;
+    
+    calculo_media: LOOP
+        FETCH cur INTO editora_id;
+        
+        IF done = 1 THEN
+            LEAVE calculo_media;
+        END IF;
+        
+        SELECT COUNT(*) INTO total_livros FROM Livro WHERE id_editora = editora_id;
+        SET contador_editoras = contador_editoras + 1;
+    END LOOP;
+    
+    CLOSE cur;
+    
+    IF contador_editoras > 0 THEN
+        RETURN total_livros / contador_editoras;
+    ELSE
+        RETURN 0.00;
+    END IF;
+END;
+//
+DELIMITER ;
