@@ -24,3 +24,22 @@ BEGIN
     
     INSERT INTO Auditoria (mensagem) VALUES ('Nome atualizado de "', nome_antigo, '" para "', NEW.nome, '"'));
 END;
+
+-- Exercício 4
+
+USE exercicios_trigger;
+
+DELIMITER $$
+
+CREATE TRIGGER impedirNullOuVazio
+BEFORE UPDATE ON Clientes FOR EACH ROW
+BEGIN
+    IF NEW.nome IS NULL OR NEW.nome = '' THEN
+        SET NEW.nome = OLD.nome;
+        INSERT INTO Auditoria (mensagem) VALUES ('Tentativa de atualização de nome para vazio ou NULL');
+    END IF;
+END;
+$$
+
+DELIMITER ;
+
